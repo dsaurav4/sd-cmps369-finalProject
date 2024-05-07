@@ -1,0 +1,37 @@
+extends layout.pug
+
+block content
+  if contact
+    div(class="container m-5")
+      div(class="d-inline-flex flex-wrap justify-content-between w-100")
+        div(class="flex-fill col-12 col-md-6")
+          h1 Contact Info
+          h2 #{contact.Title}. #{contact.First_Name} #{contact.Last_Name}
+        a(href="/" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover ms-2") Back to list
+      hr
+      div(class="w-75")
+        div.row
+          div(class="flex-fill col-12 col-md-6 mt-3")
+            p
+              b Phone number: 
+              span #{contact.Phone_Number}
+            p
+              i May #{!contact.Contact_By_Phone ? 'NOT' : ''} be contacted by phone or text
+          div(class="flex-fill col-12 col-md-6 mt-3")
+            p
+              b Email address: 
+              span #{contact.Email_Address}
+            p
+              i May #{!contact.Contact_By_Email ? 'NOT' : ''} be contacted by email
+        div.row
+          div(class="flex-fill mt-3") 
+            p
+              b Address:
+              section= contact.Address
+            p
+              i May #{!contact.Contact_By_Mail ? 'NOT' : ''} be contacted by mail
+      hr
+      div(class="d-inline-flex flex-wrap")
+        a(href=`/${contact.ID}/edit` class="btn btn-primary me-2" role="button") Edit contact
+        a(href=`/${contact.ID}/delete` class="btn btn-danger" role="button") Delete contact
+

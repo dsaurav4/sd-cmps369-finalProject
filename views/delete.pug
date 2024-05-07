@@ -1,0 +1,10 @@
+extends layout.pug
+block content
+  div(class="container d-flex flex-column align-items-center" style="margin-top: 200px")
+    h1 Delete Contact
+    h2 #{contact.First_Name} #{contact.Last_Name}
+    p Are you sure you want to delete this contact?
+    form(action=`/${contact.ID}/delete` method="post")
+      div(class="d-flex")
+        button(type="submit" class="btn btn-danger me-2") Yes!
+        a(href=`/${contact.ID}` class="btn btn-primary") Nevermind 

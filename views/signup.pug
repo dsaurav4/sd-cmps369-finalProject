@@ -1,0 +1,35 @@
+extends layout.pug
+block content
+    div(class="d-flex flex-column align-items-center justify-content-center min-vh-100 bg-light")
+      h1 Sign up
+      p(class="lead text-center" style="width: 50%") 
+        | Please select a username, and a password. Don't worry about any password rules here, we don't really care much about protecting your information - so 
+        code helloworld 
+        |  is just fine by us!
+      form(action="/signup" method="post")
+        section(class="d-flex flex-column mb-2")
+          div(class="form-floating")
+            input(name="first" class="form-control" placeholder="First Name" required="")
+            label(for="first" class="form-label") First Name
+          div(class="form-floating")
+            input(name="last" class="form-control" placeholder="Last Name" required="")
+            label(for="last" class="form-label") Last Name
+          hr
+          div(class="form-floating")
+            input(name="username" class="form-control" placeholder="Username"  required="")
+            label(for="username" class="form-label") Username
+          div(class="form-floating")            
+            input(name="password" class="form-control" placeholder="Password" type="password" required="")
+            label(for="password" class="form-label" class="form-label") Password
+          div(class="form-floating")
+            input(name="password2" type="password" placeholder="Confirm Password" class="form-control" required="")
+            label(for="password2" class="form-label") Confirm Password
+          hr
+        section(class="d-flex justify-content-between align-items-end mb-3")
+          button(type="submit" class="btn btn-primary") Sign up
+          a(href="/" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover") Nevermind
+        if message 
+          p(class="border border-warning-subtle bg-warning-subtle mt-2 rounded-3 px-1")= message
+        section
+          p(class="ms-3") Already have an account? 
+            a(href="/login" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover ms-2") Sign in here!

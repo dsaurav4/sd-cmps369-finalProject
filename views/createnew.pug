@@ -1,0 +1,66 @@
+extends layout.pug
+block content
+  div(class="container p-3" style="width: 75%;")
+    h1(class="text-center mb-2") Create Contact
+    div
+      form(action="/create" method="post")
+          fieldset
+            legend(class="mb-3") Basic Info
+            div(class="row g-3")
+              div.col-md-2.col-sm-4(style="max-width: 30%")
+                label(for="title" class="form-label") Title:
+                select.form-select.form-select-sm(name="title")
+                  option(value="1" selected=(error && contact.title === "1" ? true : false)) Mr. 
+                  option(value="2" selected=(error && contact.title === "2" ? true : false)) Mrs. 
+                  option(value="3" selected=(error && contact.title === "3" ? true : false)) Ms. 
+                  option(value="4" selected=(error && contact.title === "4" ? true : false)) Dr. 
+              div(class="col-md-5 col-sm-8")
+                label(for="first" class="form-label") First Name:
+                input(name="first" class="form-control" value=(error && contact.firstName) required)
+              div(class="col-md-5")
+                label(for="last" class="form-label") Last Name:
+                input(name="last" class="form-control" value=(error && contact.lastName) required)
+              div(class="col-md-6")
+                label(for="phone" class="form-label") Phone:
+                input(type="tel" name="phone" class="form-control" value=(error && contact.phoneNumber) required)
+              div(class="col-md-6")
+                label(for="email" class="form-label") Email:
+                div(class="input-group")
+                  span(class="input-group-text") @
+                  input(type="email" name="email" class="form-control" value=(error && contact.emailAddress) required)
+          hr(class="my-3")
+          fieldset
+            legend Address
+            div(class="row g-3")
+              div(class="col-md-12")
+                label(for="street" class="form-label") Street:
+                input(name="street" class="form-control" required)
+              div(class="col-md-12")
+                label(for="city" class="form-label") City:
+                input(name="city" class="form-control" required)
+              div(class="col-md-4")
+                label(for="state" class="form-label") State:
+                input(name="state" class="form-control" required)
+              div(class="col-md-4")
+                label(for="zip" class="form-label") Zip:
+                input(name="zip" class="form-control")
+              div(class="col-md-4")
+                label(for="country" class="form-label") Country:
+                input(name="country" class="form-control" required)
+          hr(class="my-3")          
+          fieldset
+            legend Contact Preferences
+            div(class="form-check")
+              input(type="checkbox" name="contact_by_phone" class="form-check-input" checked=(error && contact.contactByPhone ? true : false))
+              label(for="contact_by_phone" class="form-check-label") Contact by phone
+            div(class="form-check")
+              input(type="checkbox" name="contact_by_email" class="form-check-input" checked=(error && contact.contactByEmail ? true : false))
+              label(for="contact_by_email" class="form-check-label") Contact by email
+            div(class="form-check")
+              input(type="checkbox" name="contact_by_mail" class="form-check-input" checked=(error && contact.contactByMail ? true : false))
+              label(for="contact_by_mail" class="form-check-label") Contact by mail
+          hr(class="my-3")          
+          button(class="btn btn-primary btn-lg me-3 mb-2" type="submit") Create New Contact
+          a(href="/" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover fs-5") Cancel
+      if error 
+        p.bg-warning-subtle.p-3.bordered.rounded.mt-3 #{error}

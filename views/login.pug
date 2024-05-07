@@ -1,0 +1,21 @@
+extends layout.pug
+block content
+    div(class="d-flex flex-column align-items-center justify-content-center min-vh-100 bg-light")
+      h1 Sign in  
+      form(action="/login" method="post")
+            section(class="d-flex flex-column mb-2")
+              div(class="form-floating")
+                input(name="username" class="form-control" placeholder="Username" required="")
+                label(for="username" class="form-label") Username
+              div(class="form-floating")
+                input(name="password" type="password" class="form-control" placeholder="Password" required="")
+                label(for="password" class="form-label") Password
+            section(class="d-flex justify-content-between align-items-end")
+              button(type="submit" class="btn btn-primary") Sign in
+              a(href="/" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover") Nevermind
+            section
+              if message 
+                p(class="border border-warning-subtle bg-warning-subtle mt-2 rounded-3 px-1")= message
+            section(class="mt-3")
+              p Don't have an account yet?
+                a(href="/signup" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover ms-2") Sign up here!

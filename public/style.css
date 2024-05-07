@@ -1,0 +1,22 @@
+.poppins-medium {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+#map-container {
+  position: relative;
+  height: 700px;
+  margin-bottom: 5rem;
+}
+
+#map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+ul {
+  cursor: pointer;
+}
