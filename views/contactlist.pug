@@ -7,11 +7,11 @@ block content
         h1(class="float-md-start float-none mb-md-0 mb-3") Contact List
       div(class="col-12 col-md-6")
         a(class="btn btn-primary float-md-end float-none" href="/create" role="button") New contact
-      div.col-md-6.col-12.my-3
-        div.row.ms-1
-          label.col-3.px-0(for="form-label") Search Name: 
-          div.col-9
-            input(type="text" class="form-control" id="searchInput" placeholder="Type to search..." name="searchByName")
+  div.container      
+    div.row
+      div.col-md-6.my-3
+        label(for="searchByName" class="form-label") Search Name:
+        input(type="text" class="form-control" id="searchInput" placeholder="Type to search..." name="searchByName")
     div(id="contactsList")
       each contact in contacts
         ul(class="list-group list-group-flush list-group-horizontal-md mb-3 mb-md-1 border border-dark rounded-3" data-lng =(contact.Longitude) data-lat =(contact.Latitude)) 
