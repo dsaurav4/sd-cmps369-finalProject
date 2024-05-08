@@ -2,19 +2,20 @@ extends layout.pug
 block content
   div(class="container p-3" style="width: 75%;")
     h1(class="text-center mb-2") Create Contact
+    hr
     div
       form(action="/create" method="post")
           fieldset
-            legend(class="mb-3") Basic Info
+            legend Basic Info
             div(class="row g-3")
-              div.col-md-2.col-sm-4(style="max-width: 30%")
+              div.col-md-2(style="max-width: 30%")
                 label(for="title" class="form-label") Title:
                 select.form-select.form-select-sm(name="title")
                   option(value="1" selected=(error && contact.title === "1" ? true : false)) Mr. 
                   option(value="2" selected=(error && contact.title === "2" ? true : false)) Mrs. 
                   option(value="3" selected=(error && contact.title === "3" ? true : false)) Ms. 
                   option(value="4" selected=(error && contact.title === "4" ? true : false)) Dr. 
-              div(class="col-md-5 col-sm-8")
+              div(class="col-md-5")
                 label(for="first" class="form-label") First Name:
                 input(name="first" class="form-control" value=(error && contact.firstName) required)
               div(class="col-md-5")
@@ -33,20 +34,8 @@ block content
             legend Address
             div(class="row g-3")
               div(class="col-md-12")
-                label(for="street" class="form-label") Street:
-                input(name="street" class="form-control" required)
-              div(class="col-md-12")
-                label(for="city" class="form-label") City:
-                input(name="city" class="form-control" required)
-              div(class="col-md-4")
-                label(for="state" class="form-label") State:
-                input(name="state" class="form-control" required)
-              div(class="col-md-4")
-                label(for="zip" class="form-label") Zip:
-                input(name="zip" class="form-control")
-              div(class="col-md-4")
-                label(for="country" class="form-label") Country:
-                input(name="country" class="form-control" required)
+                label(for="address" class="form-label") Enter Address:
+                input(name="address" class="form-control" required)
           hr(class="my-3")          
           fieldset
             legend Contact Preferences
@@ -60,7 +49,7 @@ block content
               input(type="checkbox" name="contact_by_mail" class="form-check-input" checked=(error && contact.contactByMail ? true : false))
               label(for="contact_by_mail" class="form-check-label") Contact by mail
           hr(class="my-3")          
-          button(class="btn btn-primary btn-lg me-3 mb-2" type="submit") Create New Contact
+          button(class="btn btn-primary btn-lg me-3 mb-2" type="submit") Save
           a(href="/" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover fs-5") Cancel
       if error 
         p.bg-warning-subtle.p-3.bordered.rounded.mt-3 #{error}

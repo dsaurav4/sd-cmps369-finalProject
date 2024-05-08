@@ -10,16 +10,7 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
   const heading = "New Contact";
-  const address =
-    req.body.street +
-    " " +
-    req.body.city +
-    " " +
-    req.body.state +
-    " " +
-    req.body.zip +
-    " " +
-    req.body.country;
+  const address = req.body.address;
 
   const results = await geocoder.geocode(address);
 
@@ -32,11 +23,6 @@ router.post("/", async (req, res) => {
       lastName: req.body.last,
       phoneNumber: req.body.phone,
       emailAddress: req.body.email,
-      street: req.body.street,
-      city: req.body.city,
-      state: req.body.state,
-      zip: req.body.zip,
-      country: req.body.country,
       address: formattedAddress,
       contactByEmail: req.body.contact_by_email === "on" ? 1 : 0,
       contactByPhone: req.body.contact_by_phone === "on" ? 1 : 0,
@@ -66,7 +52,7 @@ router.post("/", async (req, res) => {
       contactByMail: req.body.contact_by_mail === "on" ? 1 : 0,
     };
     res.render("createnew", {
-      error: "Invalid address provided. Please enter a correct address.",
+      error: "Invalid address provided. Please enter a valid address.",
       contact,
       heading,
     });

@@ -7,36 +7,41 @@ block content
         h1(class="float-md-start float-none mb-md-0 mb-3") Contact List
       div(class="col-12 col-md-6")
         a(class="btn btn-primary float-md-end float-none" href="/create" role="button") New contact
-    each contact in contacts
-      ul(class="list-group list-group-flush list-group-horizontal-md mb-3 mb-md-1 border border-dark rounded-3" data-lng =(contact.Longitude) data-lat =(contact.Latitude)) 
-        li(class="list-group-item col-12 col-md-2")
-          a(href=`/${contact.ID}` class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover text-wrap" onclick="event.stopPropagation()")= contact.Title + '. ' + contact.First_Name + ' ' + contact.Last_Name
-        li(class="list-group-item col-12 col-md-2") 
-          section Phone: #{contact.Phone_Number}
-          section.text-break Email: #{contact.Email_Address}
-        li(class=`list-group-item col-12 ${isUser ? "col-md-2" : "col-md-4"}`) 
-          section= contact.Address
-        li.list-group-item.col-12.col-md-2 
-          section Lat: #{contact.Latitude}
-          section Lng: #{contact.Longitude} 
-        li(class="list-group-item col-12 col-md-2 container text-center")
-          div.row.w-75(style="margin: 0 auto;")
-            div(class="form-check col-4 col-md-12")
-              input(type="checkbox", id=`phone${contact.ID}`, disabled="", checked=contact.Contact_By_Phone ? true : false, class="form-check-input")
-              label(for=`phone${contact.ID}` class="form-check-label") Phone
-            div(class="form-check col-4 col-md-12 ")
-              input(type="checkbox", id=`email${contact.ID}`, disabled="", checked=contact.Contact_By_Email ? true : false, class="form-check-input")
-              label(for=`email${contact.ID}` class="form-check-label") Email
-            div(class="form-check col-4 col-md-12 ")
-              input(type="checkbox", id=`mail${contact.ID}`, disabled="", checked=contact.Contact_By_Mail ? true : false, class="form-check-input")
-              label(for=`mail${contact.ID}` class="form-check-label") Mail
-        if isUser
-          li(class="list-group-item col-12 col-md-2")
-            div.container.w-100
-              div.row
-                a(href=`/${contact.ID}/edit` class="btn btn-primary mb-1" role="button" onclick="event.stopPropagation()") Edit 
-              div.row
-                a(href=`/${contact.ID}/delete` class="btn btn-danger" role="button" onclick="event.stopPropagation()") Delete 
-  div#map-container.container.mt-5
+      div.col-md-6.col-12.my-3
+        div.row.ms-1
+          label.col-3.px-0(for="form-label") Search Name: 
+          div.col-9
+            input(type="text" class="form-control" id="searchInput" placeholder="Type to search..." name="searchByName")
+    div(id="contactsList")
+      each contact in contacts
+        ul(class="list-group list-group-flush list-group-horizontal-md mb-3 mb-md-1 border border-dark rounded-3" data-lng =(contact.Longitude) data-lat =(contact.Latitude)) 
+          li(class="list-group-item col-12 col-md-2" data-name=`${contact.First_Name + " " + contact.Last_Name}`)
+            a(href=`/${contact.ID}` class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover text-wrap" onclick="event.stopPropagation()")= contact.Title + '. ' + contact.First_Name + ' ' + contact.Last_Name
+          li(class="list-group-item col-12 col-md-2") 
+            section Phone: #{contact.Phone_Number}
+            section.text-break Email: #{contact.Email_Address}
+          li(class=`list-group-item col-12 ${isUser ? "col-md-2" : "col-md-4"}`) 
+            section= contact.Address
+          li.list-group-item.col-12.col-md-2 
+            section Lat: #{contact.Latitude}
+            section Lng: #{contact.Longitude} 
+          li(class="list-group-item col-12 col-md-2 container text-center")
+            div.row.w-75(style="margin: 0 auto;")
+              div(class="form-check col-4 col-md-12")
+                input(type="checkbox", id=`phone${contact.ID}`, disabled="", checked=contact.Contact_By_Phone ? true : false, class="form-check-input")
+                label(for=`phone${contact.ID}` class="form-check-label") Phone
+              div(class="form-check col-4 col-md-12 ")
+                input(type="checkbox", id=`email${contact.ID}`, disabled="", checked=contact.Contact_By_Email ? true : false, class="form-check-input")
+                label(for=`email${contact.ID}` class="form-check-label") Email
+              div(class="form-check col-4 col-md-12 ")
+                input(type="checkbox", id=`mail${contact.ID}`, disabled="", checked=contact.Contact_By_Mail ? true : false, class="form-check-input")
+                label(for=`mail${contact.ID}` class="form-check-label") Mail
+          if isUser
+            li(class="list-group-item col-12 col-md-2")
+              div.container.w-100
+                div.row
+                  a(href=`/${contact.ID}/edit` class="btn btn-primary mb-1" role="button" onclick="event.stopPropagation()") Edit 
+                div.row
+                  a(href=`/${contact.ID}/delete` class="btn btn-danger" role="button" onclick="event.stopPropagation()") Delete 
+  div#map-container.container.mt-5.d-flex.flex-column.align-items-center
     div#map
-

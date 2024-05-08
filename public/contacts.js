@@ -71,3 +71,25 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution:
     '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 }).addTo(map);
+
+document.addEventListener('DOMContentLoaded', function() {
+  const searchInput = document.getElementById('searchInput');
+  const contactLists = document.querySelectorAll('.list-group');
+
+  searchInput.addEventListener('keyup', function(e) {
+    const searchValue = e.target.value.toLowerCase();
+
+    contactLists.forEach(list => {
+
+      const firstLi = list.querySelector('li:first-child');
+      if (firstLi) {
+        const name = firstLi.dataset.name.toLowerCase();
+        if (name.includes(searchValue)) {
+          list.style.display = ''; 
+        } else {
+          list.style.display = 'none';
+        }
+      }
+    });
+  });
+});

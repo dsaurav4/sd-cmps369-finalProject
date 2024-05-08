@@ -62,16 +62,7 @@ router.get("/:id/edit", logged_in, async (req, res) => {
 });
 
 router.post("/:id/edit", logged_in, async (req, res) => {
-  const address =
-    req.body.street +
-    " " +
-    req.body.city +
-    " " +
-    req.body.state +
-    " " +
-    req.body.zip +
-    " " +
-    req.body.country;
+  const address = req.body.address;
 
   const results = await geocoder.geocode(address);
 
@@ -84,11 +75,6 @@ router.post("/:id/edit", logged_in, async (req, res) => {
       lastName: req.body.last,
       phoneNumber: req.body.phone,
       emailAddress: req.body.email,
-      street: req.body.street,
-      city: req.body.city,
-      state: req.body.state,
-      zip: req.body.zip,
-      country: req.body.country,
       address: formattedAddress,
       contactByEmail: req.body.contact_by_email === "on" ? 1 : 0,
       contactByPhone: req.body.contact_by_phone === "on" ? 1 : 0,
@@ -101,16 +87,25 @@ router.post("/:id/edit", logged_in, async (req, res) => {
       await req.db.updateContact(contact, req.params.id);
       res.redirect(`/${req.params.id}`);
     } catch (error) {
-      res.status(500).send("Error editing contact");
+      res.render("edit", {error: "Error editing contact"});
     }
   } else {
-    const contact = await req.db.findContactById(req.params.id);
-    const heading = "Edit" + " " + contact.First_Name;
+    const contact = {
+      title: req.body.title,
+      firstName: req.body.first,
+      lastName: req.body.last,
+      phoneNumber: req.body.phone,
+      emailAddress: req.body.email,
+      contactByEmail: req.body.contact_by_email === "on" ? 1 : 0,
+      contactByPhone: req.body.contact_by_phone === "on" ? 1 : 0,
+      contactByMail: req.body.contact_by_mail === "on" ? 1 : 0,
+    }
+    const heading = "Invalid Address"
     res.render("edit", {
       contact,
       heading,
       error:
-        "Invalid address provided. Please enter a correct address and fill the details again.",
+        "Invalid address provided. Please enter a valid address.",
     });
     return;
   }

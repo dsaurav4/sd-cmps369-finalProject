@@ -6,7 +6,7 @@
 
 #map-container {
   position: relative;
-  height: 700px;
+  height: 500px;
   margin-bottom: 5rem;
 }
 
@@ -14,7 +14,7 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 100%;
+  width: 75%;
 }
 
 ul {
