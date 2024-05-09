@@ -47,8 +47,8 @@ class ContactDB {
     ]);
     if (contact.length === 0) {
       await this.db.create("Users", [
-        { column: "First_Name", value: "cmps369" },
-        { column: "Last_Name", value: "" },
+        { column: "First_Name", value: "Admin" },
+        { column: "Last_Name", value: " " },
         { column: "Username", value: "cmps369" },
         {
           column: "Password",

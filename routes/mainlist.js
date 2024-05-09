@@ -7,7 +7,7 @@ const logged_in = (req, res, next) => {
   if (req.session.user) {
     next();
   } else {
-    res.render("noaccess", {});
+    res.render("noaccess", {nosignin: true});
   }
 };
 
